@@ -1,0 +1,10 @@
+$(document).ready(function(){
+$('#searchText').typefast({
+urlstart:"https://en.wikipedia.org/w/api.php?action=opensearch&search=",
+urlend:"&format=json&callback=?"
+});
+$('#searchText1').typefast({
+urlstart:"https://en.wikipedia.org/w/api.php?action=opensearch&search=",
+urlend:"&format=json&callback=?"
+});
+})
