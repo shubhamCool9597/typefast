@@ -3,7 +3,7 @@ var $current;
 var Events = function() {}
 Events.prototype = {
   constructor: Events,
-  currentKey: function(e) {
+  currentKey: function(e,m) {
     e.preventDefault();
     // alert('working');
     var isFirst = false;
@@ -55,12 +55,22 @@ Events.prototype = {
         $nextDiv.css('background-color', 'yellow');
         $current = $nextDiv;
         console.log($current);
-        input.val($.trim($current.text()))
-        input.prev().val('');
+        if(m === $.trim($current.text()).slice(0, m.length)){
+        input.prev().val($.trim($current.text()))
+          }
+        else{
+            input.prev().val('')
+            }
+        // input.prev().val('');
       } else {
         $current.css('background-color', 'yellow');
-        input.val($.trim($current.text()));
-        input.prev().val('');
+        if(m === $.trim($current.text()).slice(0, m.length)){
+        input.prev().val($.trim($current.text()))
+          }
+        else{
+            input.prev().val('')
+            }
+        // input.prev().val('');
       }
       // console.log(commSingle);
       // console.log($(commSingle + '>.single'));
@@ -82,27 +92,43 @@ Events.prototype = {
         $nextDiv.css('background-color', 'yellow');
 
         $current = $nextDiv;
-        input.val($.trim($current.text()));
-        input.prev().val('');
+        if(m === $.trim($current.text()).slice(0, m.length)){
+        input.prev().val($.trim($current.text()))
+          }
+        else{
+            input.prev().val('')
+            }
+        // input.prev().val('');
       } else {
 
         $current.css('background-color', 'yellow');
-        input.val($.trim($current.text()));
-        input.prev().val('');
+        if(m === $.trim($current.text()).slice(0, m.length)){
+        input.prev().val($.trim($current.text()))
+          }
+        else{
+            input.prev().val('')
+            }
+        // input.prev().val('');
       }
 }
 },
 
-tabKey:function(e){
-    if (e.keyCode == 9) {
-      e.preventDefault()
-      input.val(input.first().text());
+completeKey:function(e){
+    if (e.keyCode == 39) {
+      e.preventDefault();
+    if(input.prev().val()){
+      input.val(input.prev().val());
       input.prev().val('');
 
     }
 
-
+}
   },
+backSpace:function(e){
+  if (e.keyCode == 8){
+input.prev().val('');
+}
+},
   enterKey: function(e) {
     if (e.keyCode == 13) {
       e.preventDefault();
@@ -130,6 +156,9 @@ tabKey:function(e){
 
 
   },
+  getData:function(j){
+console.log(j);
+},
   mouseHighlight: function() {
     $(commSingle + '>.single').mouseover(function() {
 
@@ -140,6 +169,7 @@ tabKey:function(e){
         // alert('dsd');
         input.val($.trim($(this).text()));
         input.prev().val('');
+        input.next().empty();
         $(this).css('background-color','');
 
 

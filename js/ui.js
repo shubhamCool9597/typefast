@@ -1,7 +1,7 @@
 var Ui = function(events) {
   this.input = input;
   this.hint = input.prev();
-  this.comment = comment;
+  this.comment = input.next();
   this.single = $('.single');
   this.result = $(commSingle + '>.single');
   this.info=$('.info');
@@ -30,20 +30,21 @@ Ui.prototype = {
 //   //   _this.info.append(div1);
 //   //
 //   // },
-  keyarrow: function(e) {
+  keyarrow: function(e,m,a) {
     e.preventDefault();
     var _this=this;
-    _this.events.currentKey(e);
-
+    if(a['keyboardEvent']==true){
+    _this.events.currentKey(e,m);
+      }
 
   },
   enterKey: function(e) {
     var _this=this;
     _this.events.enterKey(e);
   },
-  tabKey: function(e) {
+  completeKey: function(e) {
     var _this=this;
-    _this.events.tabKey(e);
+    _this.events.completeKey(e);
   },
   wordHighlight: function(m) {
     var _this=this;
@@ -52,6 +53,14 @@ Ui.prototype = {
   mouse: function() {
     var _this=this;
     _this.events.mouseHighlight();
+  },
+  backSpace:function(e) {
+    var _this=this;
+    _this.events.backSpace(e);
+  },
+  getData:function(k) {
+    var _this=this;
+    _this.events.getData(k);
   },
 //
   removeChild: function() {

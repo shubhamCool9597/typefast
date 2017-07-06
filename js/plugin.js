@@ -41,11 +41,19 @@ input=$(this);
 id = $(this).attr('id');
 
 hint1 = $(hin[id]);
+$(arr[id]).empty();
+// input.val('');
 // console.log(comment);
 // console.log(input);
 })
 $(this).on('blur',function(){
-
+var m = $(this).attr('id');
+// $(arr[m]).empty();
+$(hin[m]).val('');
+// input.val('');
+$(this).next().empty();
+// $(this).prev().val('');
+// $(this).val('')
 })
 
 $(this).on('keydown', function(e) {
@@ -62,21 +70,25 @@ $(this).on('keydown', function(e) {
       e.preventDefault();
         // alert('up*down');
     console.log(a['urlstart']+a['urlend']);
+        comment=_this.next();
       // $('.info1').css('display','none');
       // $('.loading').css('display','none');
-      ui.keyarrow(e);
+      ui.keyarrow(e,m,a);
     } else if (e.keyCode == 13) {
       e.preventDefault();
+      comment=_this.next();
       // alert('enter');
       // $('.comment').css('display','none');
       // $('.info').css('display','none');
       // $('.info1>.information').css('display','block');
       // $('.result').val('');
       ui.enterKey(e);
-    } else if (e.keyCode == 9) {
+    } else if (e.keyCode == 39) {
     e.preventDefault();
     // alert('tab');
-    ui.tabKey(e);
+  if(a['autocomplete']==true){
+    ui.completeKey(e);
+}
 
     } else if (e.keyCode == 8) {
         // alert('backspace')
@@ -85,6 +97,7 @@ $(this).on('keydown', function(e) {
       // $('.result').val('');
       // $('.loading').css('display','none');
       // $('.comment').css('display','none');
+      ui.backSpace(e);
 
     } else {
       // alert('else')
