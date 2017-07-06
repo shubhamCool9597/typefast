@@ -1,10 +1,13 @@
 $(document).ready(function(){
 $('#searchText').typefast({
 urlstart:"https://en.wikipedia.org/w/api.php?action=opensearch&search=",
-urlend:"&format=json&callback=?"
+urlend:"&format=json&callback=?",
+textHighlight:true,
+mouseEvent:true
 });
 $('#searchText1').typefast({
 urlstart:"https://en.wikipedia.org/w/api.php?action=opensearch&search=",
-urlend:"&format=json&callback=?"
+urlend:"&format=json&callback=?",
+mouseEvent:true
 });
 })

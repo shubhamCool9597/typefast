@@ -1,5 +1,5 @@
 var timeOut = null;
-var $current;
+
 var $info;
 var input;
 var hint;
@@ -14,11 +14,11 @@ var arr = {};
 var hin = {}
 var selectedInput = null
 var id;
-var commSingle
-
+var commSingle;
 $.fn.typefast = function(a) {
 
   $(this).one('click', function() {
+
     $('body').bodyAppend($(this));
     $(this).css({
       'position': 'relative',
@@ -31,45 +31,55 @@ $.fn.typefast = function(a) {
       name: 'comment',
       class: 'comment' + count
     }).insertAfter($(this));
-    comment = $('.comment' + count + '');
+    // comment = $('.comment' + count + '');
     cs = '.comment' + count + '';
     arr[$(this).attr('id')] = cs;
     count = count + 1;
   })
 $(this).on('focus',function(){
 input=$(this);
+id = $(this).attr('id');
+
+hint1 = $(hin[id]);
+// console.log(comment);
 // console.log(input);
 })
 $(this).on('blur',function(){
 
 })
+
 $(this).on('keydown', function(e) {
 
   var _this = $(this);
+  var events = new Events();
+  var ui=new Ui(events);
+  var api = new Api(ui);
+
 
   setTimeout(function() {
     var m = _this.val();
     if (e.keyCode == 38 || e.keyCode == 40) {
       e.preventDefault();
-        alert('up*down');
+        // alert('up*down');
     console.log(a['urlstart']+a['urlend']);
       // $('.info1').css('display','none');
       // $('.loading').css('display','none');
-      // ui.keyarrow(e);
+      ui.keyarrow(e);
     } else if (e.keyCode == 13) {
       e.preventDefault();
-      alert('enter');
+      // alert('enter');
       // $('.comment').css('display','none');
       // $('.info').css('display','none');
       // $('.info1>.information').css('display','block');
       // $('.result').val('');
-      // ui.enterKey(e);
+      ui.enterKey(e);
     } else if (e.keyCode == 9) {
     e.preventDefault();
-    alert('tab');
+    // alert('tab');
+    ui.tabKey(e);
 
     } else if (e.keyCode == 8) {
-        alert('backspace')
+        // alert('backspace')
       // $('.info').css('display','none');
       // $('.info1>.information').css('display','none');
       // $('.result').val('');
@@ -77,10 +87,13 @@ $(this).on('keydown', function(e) {
       // $('.comment').css('display','none');
 
     } else {
-      alert('else')
-      console.log(m);
-      // e.preventDefault();
-      // api.searchResult(m, e, a);
+      // alert('else')
+      // console.log(m);
+      e.preventDefault();
+      commSingle = arr[id];
+      comment=_this.next();
+      console.log(comment);
+      api.searchResult(m, e, a);
     }
 
 
