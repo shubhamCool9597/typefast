@@ -20,12 +20,12 @@ $.fn.typefast = function(a) {
   $(this).one('click', function() {
 
     $('body').bodyAppend($(this));
-    $(this).css({
+  // input according to code
+ $(this).css({
       'position': 'relative',
-      'top': '-34px',
+      'top': '-55px',
       'background': 'transparent',
-      'padding-left': '11px',
-      'font-size': '16px'
+
     })
     $('<div>').attr({
       name: 'comment',
@@ -33,6 +33,11 @@ $.fn.typefast = function(a) {
     }).insertAfter($(this));
     // comment = $('.comment' + count + '');
     cs = '.comment' + count + '';
+    $(cs).css({
+  'margin-top': '-55px',
+  'position':'relative',
+  'width':'465px'
+});
     arr[$(this).attr('id')] = cs;
     count = count + 1;
   })
@@ -51,12 +56,15 @@ var m = $(this).attr('id');
 // $(arr[m]).empty();
 $(hin[m]).val('');
 // input.val('');
-$(this).next().empty();
+// $(this).next().empty();
 // $(this).prev().val('');
 // $(this).val('')
 })
 
 $(this).on('keydown', function(e) {
+
+$('.loader').css('display','block');
+$('.loading').css('display','none');
 
   var _this = $(this);
   var events = new Events();
@@ -68,6 +76,7 @@ $(this).on('keydown', function(e) {
     var m = _this.val();
     if (e.keyCode == 38 || e.keyCode == 40) {
       e.preventDefault();
+      $('#loader').css('display','none');
         // alert('up*down');
     console.log(a['urlstart']+a['urlend']);
         comment=_this.next();
@@ -84,6 +93,7 @@ $(this).on('keydown', function(e) {
       // $('.result').val('');
       ui.enterKey(e);
     } else if (e.keyCode == 39) {
+    $('#loader').css('display','none');
     e.preventDefault();
     // alert('tab');
   if(a['autocomplete']==true){
@@ -97,7 +107,14 @@ $(this).on('keydown', function(e) {
       // $('.result').val('');
       // $('.loading').css('display','none');
       // $('.comment').css('display','none');
+      $('#loader').css('display','block');
+
       ui.backSpace(e);
+      input.prev().val('');
+      api.searchResult(m, e, a);
+      if(input.val().length==0){
+$('#loader').css('display','none')
+input.prev().val('');}
 
     } else {
       // alert('else')
@@ -106,6 +123,8 @@ $(this).on('keydown', function(e) {
       commSingle = arr[id];
       comment=_this.next();
       console.log(comment);
+      $('#loader').css('display','block');
+      // input.prev().val('');
       api.searchResult(m, e, a);
     }
 
@@ -121,17 +140,17 @@ $.fn.bodyAppend = function(m) {
     $('<input>').attr({
       type: 'text',
       name: 'input1',
-      class: 'form-control',
+      class: 'control',
       id: 'result' + hCount,
       tabindex:'-1'
         }).insertBefore(m);
-        $('#result' + hCount).css({
-          'color': '#9a9191',
-          'padding-left': '11px',
-          'font-size': '16px',
-          'letter-spacing': 'inherit',
-          'width': '100%'
-        });
+        // $('#result' + hCount).css({
+        //   'color': '#9a9191',
+        //   'padding-left': '11px',
+        //   'font-size': '16px',
+        //   'letter-spacing': 'inherit',
+        //   'width': '100%'
+        // });
         hint = $('#result' + hCount)
         hin[id] = hint;
         hCount = hCount + 1;

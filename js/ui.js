@@ -19,7 +19,7 @@ Ui.prototype = {
     comment.append(div);
     single = $('.single');
     // console.log(input.prev());
-
+$('#loader').css('display','none');
 
   },
 //   // infoAppend:function (data) {
@@ -58,9 +58,9 @@ Ui.prototype = {
     var _this=this;
     _this.events.backSpace(e);
   },
-  getData:function(k) {
+  getData:function(k,a) {
     var _this=this;
-    _this.events.getData(k);
+    return _this.events.getData(k,a);
   },
 //
   removeChild: function() {

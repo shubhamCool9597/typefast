@@ -4,6 +4,7 @@ var Events = function() {}
 Events.prototype = {
   constructor: Events,
   currentKey: function(e,m) {
+
     e.preventDefault();
     // alert('working');
     var isFirst = false;
@@ -56,12 +57,14 @@ Events.prototype = {
         $current = $nextDiv;
         console.log($current);
         if(m === $.trim($current.text()).slice(0, m.length)){
+        
         input.prev().val($.trim($current.text()))
           }
         else{
             input.prev().val('')
+  // input.prev().val($.trim($current.text()))
             }
-        // input.prev().val('');
+
       } else {
         $current.css('background-color', 'yellow');
         if(m === $.trim($current.text()).slice(0, m.length)){
@@ -69,8 +72,9 @@ Events.prototype = {
           }
         else{
             input.prev().val('')
-            }
+              // input.prev().val($.trim($current.text()))
         // input.prev().val('');
+            }
       }
       // console.log(commSingle);
       // console.log($(commSingle + '>.single'));
@@ -127,6 +131,8 @@ completeKey:function(e){
 backSpace:function(e){
   if (e.keyCode == 8){
 input.prev().val('');
+$('.loading').css('display','none');
+comment.empty();
 }
 },
   enterKey: function(e) {
@@ -156,8 +162,24 @@ input.prev().val('');
 
 
   },
-  getData:function(j){
-console.log(j);
+  getData:function(j,a){
+
+
+    var parsed = JSON.parse(JSON.stringify(j));
+    var arr=[];
+  console.log(parsed);
+  for (var i in a['keyArr']) {
+
+    for(var x in parsed){
+      if(x==a['keyArr'][i]){
+        for (m in parsed[x]){
+          arr.push(parsed[x][m][a['key']]);
+              }
+
+}
+}
+}
+return arr;
 },
   mouseHighlight: function() {
     $(commSingle + '>.single').mouseover(function() {
